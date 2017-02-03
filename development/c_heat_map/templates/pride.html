@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tim Pride</title>
+	<meta charset="utf-8" />
+</head>
+<body style='margin-left: 50px'>
+    <h1><u>Pride:</u></h1>
+	<form method='POST'>
+		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    	Math: 
+    	<button type='submit' formaction='/newp' value='1' name='math'>+</button>
+		<button type='submit' formaction='/newp' value='0' name='math'>-</button>
+
+    	Prog:
+    	<button type='submit' formaction='/newp' value='1' name='programming'>+</button>
+		<button type='submit' formaction='/newp' value='0' name='programming'>-</button>
+
+		Excr:
+		<button type='submit' formaction='/newp' value='1' name='exercise'>+</button>
+		<button type='submit' formaction='/newp' value='0' name='exercise'>-</button>
+	</form>
+	{% for row in rows %}
+		<br> {{ row }}
+	{% endfor %}
+
+<!-- 	<script>
+	function sendTimeToServer(param){
+    	var time = new Date();
+    	param.value = time;
+	}
+	function checkTime(param){
+		var time = new Date();
+		param.innerHTML = time.getTime();
+	}
+	</script>
+	<button onclick="checkTime(this)">update time</button>
+	<div id="time">Time: </div> -->
+</body>
+</html>

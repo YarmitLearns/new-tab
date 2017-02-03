@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tim Notes</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <h1>Notes:</h1>
+    <ul>
+            <form method='post' action="/delete">
+            <button type='submit' form='NoteForm' value='hello'>X</button> Make a note.
+        
+            <li>Do the dishes.</li>
+        
+            <input type="submit" name="tim" value='x' >Work out.
+        
+            <li>test</li>
+        
+            <li></li>
+        
+            <li>asdf</li>
+        
+            <li>None</li>
+        
+            <li>asdf</li>
+        
+            <li>asdf</li>
+        
+            <li>asdf</li>
+        
+            <li>redo</li>
+        
+            <li>test</li>
+        
+            <li>test</li>
+        
+            <li></li>
+        
+            <li>and something else</li>
+        
+            <li>asdff</li>
+        
+            <li>ee</li>
+        
+            <li>rr</li>
+        
+            <li>tt</li>
+        
+            <li>qq</li>
+        
+            <li>Find out how to add a delete button.</li>
+            </form>
+    </ul>
+    <form method='post' action="/new" id='NoteForm'> 
+        <input id="csrf_token" name="csrf_token" type="hidden" value="IjE3YTE2ODdhMWJhODc3MzE1NWU1NGQ0NGMzMDY4YmQzOTBhYzE1ODYi.C2gdxg.mbOtq1Fz-PBHYqWnrumI2gwtSgY">
+        <input id="note" name="note" type="text" value="">
+        <input id="submit" name="submit" type="submit" value="Add Note">
+    </form>
+</body>
+</html>
