@@ -9,6 +9,7 @@ from flask_wtf import FlaskForm
 from wtforms.fields import StringField, SubmitField
 from wtforms.validators import InputRequired #charlimit
 from sqlalchemy import desc
+from datetime import date, datetime
 
 
 app = Flask(__name__)
@@ -20,15 +21,18 @@ db = SQLAlchemy(app)
 
 # TODO: Add an automatically inserted date for each entry.
 class Notes(db.Model):
-    '''A single Note'''
     id = db.Column(db.Integer, primary_key=True)
     note = db.Column(db.String(200))
+    n_date = db.Column(db.DateTime)
 
-    def __init__(self, note):
+    def __init__(self, note, n_date=None):
         self.note = note
+        if n_date==None:
+            n_date = datetime.utcnow()
+        self.n_date = n_date
 
     def __repr__(self):
-        return self.note
+        return "Time: {}\nNote: {}\n".format(self.note, self.n_date)
 
 # TODO: Maybe add a priority buton as well.
 class NoteForm(FlaskForm):

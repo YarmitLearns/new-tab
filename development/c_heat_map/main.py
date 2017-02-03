@@ -20,7 +20,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///heatmap.db'
 app.config['SECRET_KEY'] = 'yabadaba dubwub'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-TEMPLATES_AUTO_RELOAD = True
+#TEMPLATES_AUTO_RELOAD = True
 
 db = SQLAlchemy(app)
 #learn how to apply this lazily
@@ -31,20 +31,20 @@ csrf = CSRFProtect(app)
 
 class Prides(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	date = db.Column(db.Integer)
+	p_date = db.Column(db.Date)
 	math = db.Column(db.Integer)
 	programming = db.Column(db.Integer)
 	exercise = db.Column(db.Integer)
 
-	def __init__(self, date, math=0, programming=0, exercise=0):
-		self.date = date
+	def __init__(self, p_date, math=0, programming=0, exercise=0):
+		self.p_date = p_date
 		self.math = math
 		self.programming = programming
 		self.exercise = exercise
 
 	def __repr__(self):
 		return "Date: {}\nMath: {}\nProgramming: {}\nExercise: {}".format(
-			self.date, self.math, self. programming, self.exercise)
+			self.p_date, self.math, self. programming, self.exercise)
 
 @app.route('/')
 def main():
@@ -54,21 +54,14 @@ def main():
 #add pride
 @app.route('/newp', methods=['POST'])
 def new_p():
-	'''
-	the template sends a post with one of the buttons pressed. to find out which one
-	i iterated through my buttons variable (containing the names of potential buttons)
-	and check against the request.forms dictionary)
-	'''
-	# time = str(date.today())
-	# row = Prides(time, 0, 0, 0)
 	buttons = ['math', 'programming', 'exercise']
 	for pride_button in buttons:
 		if request.form.get(pride_button):
 			button_value = int(request.form[pride_button])
-			time = str(date.today())
-			today_row = Prides.query.filter_by(date=time).first()
+			p_date = date.today()
+			today_row = Prides.query.filter_by(p_date=p_date).first()
 			if not today_row:
-				today_row = Prides(time, 0,0,0)
+				today_row = Prides(p_date, 0,0,0)
 			setattr(today_row, pride_button, button_value)
 			db.session.add(today_row)
 			db.session.commit()

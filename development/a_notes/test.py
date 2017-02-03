@@ -29,6 +29,10 @@
 
 # testing = Test(1,2)
 # what_user_wants = 'programming'
-tim = int("1")
-print(type(tim))
-print(tim)
+# tim = int("1")
+# print(type(tim))
+# print(tim)
+from datetime import datetime, date
+
+one = date.today()
+print(one)
