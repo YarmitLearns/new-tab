@@ -1,5 +1,6 @@
 '''
 TODO:
+-transpher sqlite to mysql
 -get notes working
 -get prides working
 -get links displayed
@@ -25,4 +26,3 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///heatmap.db'
 app.config['SECRET_KEY'] = 'yabadaba dubwub'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 TEMPLATES_AUTO_RELOAD = True
-
