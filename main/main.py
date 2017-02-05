@@ -1,11 +1,12 @@
 '''
 TODO:
 -√transfer sqlite to mysql
+-convert passed Date() into a python datetime object
+-upload app to python anywhere
+-create models / test models
 -get notes working
 -get prides working
 -get links displayed
--switch to mysql
--upload app to python anywhere
 -create log in so people can't change my stuff.
 
 -study math
@@ -32,7 +33,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config['SECRET_KEY'] = 'yabadaba dubwub'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['TEMPLATES_AUTO_RELOAD = True']
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 db = SQLAlchemy(app)
 

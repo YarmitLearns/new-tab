@@ -5,9 +5,14 @@
     <meta charset="utf-8" />
 </head>
 <body style='margin-left: 50px'>
-    <h1><u>Pride:</u></h1>
+    <div id="now_date_name"></div>
+    <button id="previousDate">-</button>
+    <span id="now_date"></span>
+    <button id="nextDate">+</button>
+    <hr>
     <form method='POST'>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <input type="hidden" name="selectedDate" value="x" id="serverDate"/>
         Math: 
         <button type='submit' formaction='/newp' value='1' name='math'>+</button>
         <button type='submit' formaction='/newp' value='0' name='math'>-</button>
@@ -23,18 +28,10 @@
     {% for row in rows %}
         <br> {{ row }}
     {% endfor %}
+<br><br>
+<script src="{{ url_for('static', filename='../static/pride.js') }}">
 
-<!--    <script>
-    function sendTimeToServer(param){
-        var time = new Date();
-        param.value = time;
-    }
-    function checkTime(param){
-        var time = new Date();
-        param.innerHTML = time.getTime();
-    }
-    </script>
-    <button onclick="checkTime(this)">update time</button>
-    <div id="time">Time: </div> -->
+
+</script>
 </body>
 </html>

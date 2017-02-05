@@ -1,13 +1,3 @@
-# TODO:
-# √ db.Model
-# √add buttons class
-# √add template buttons
-# √learn flask-moment library (skipped turns out it's not needed / too heavy. using date() instead)
-## √add
-## √remove
-# √reverse query
-# template query
-
 from flask import Flask, render_template, url_for, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
@@ -20,7 +10,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///heatmap.db'
 app.config['SECRET_KEY'] = 'yabadaba dubwub'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#TEMPLATES_AUTO_RELOAD = True
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 db = SQLAlchemy(app)
 #learn how to apply this lazily
@@ -48,20 +38,25 @@ class Prides(db.Model):
 
 @app.route('/')
 def main():
-	rows = Prides.query.order_by(Prides.id.desc()).all()
+	rows = Prides.query.order_by(Prides.p_date.desc()).all()
 	return render_template('pride.html', rows=rows)
 
 #add pride
+
+
 @app.route('/newp', methods=['POST'])
 def new_p():
 	buttons = ['math', 'programming', 'exercise']
 	for pride_button in buttons:
 		if request.form.get(pride_button):
 			button_value = int(request.form[pride_button])
-			p_date = date.today()
-			today_row = Prides.query.filter_by(p_date=p_date).first()
+			selected_date = request.form['selectedDate']
+			s_date_obj = date(int(selected_date[0:4]),
+							  int(selected_date[5:7]),
+							  int(selected_date[8:10]))
+			today_row = Prides.query.filter_by(p_date=s_date_obj).first()
 			if not today_row:
-				today_row = Prides(p_date, 0,0,0)
+				today_row = Prides(s_date_obj, 0,0,0)
 			setattr(today_row, pride_button, button_value)
 			db.session.add(today_row)
 			db.session.commit()
