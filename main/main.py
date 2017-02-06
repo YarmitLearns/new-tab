@@ -4,9 +4,9 @@ TODO:
 -√convert passed Date() into a python datetime object
 -√upload app to python anywhere
 -√create models / test models
--transfer notes template to shared new-tab template
--get notes working
--get prides working
+-√transfer notes template to shared new-tab template
+-√get notes working
+-√get prides working
 -get links displayed
 -refactor notes
 -create log in so people can't change my stuff.
@@ -38,6 +38,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 db = SQLAlchemy(app)
+csrf = CSRFProtect(app)
 
 class Notes(db.Model):
     id = db.Column(db.Integer, primary_key=True)

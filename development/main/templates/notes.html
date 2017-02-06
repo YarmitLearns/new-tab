@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Tim Notes</title>
+	<meta charset="utf-8" />
+</head>
+<body style='margin-left: 50px'>
+<button name='submit' type='submit' form='NForm' style="display: none"></button>
+    <h1><u>Notes:</u></h1>
+    
+        {% for note in notes %}
+            <button name='note_id' type='submit' form='NForm' value='{{ note.id }}'>X</button> {{ note.note }}<br>
+        {% endfor %}
+    
+    <form method='post' action="/new" id='NForm'> 
+        {{ form.csrf_token }} <br>
+        {{ form.note(autofocus=true) }}
+        {{ form.submit }}
+    </form>
+</body>
+</html>
