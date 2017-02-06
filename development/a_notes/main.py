@@ -34,7 +34,6 @@ class Notes(db.Model):
     def __repr__(self):
         return "Time: {}\nNote: {}\n".format(self.note, self.n_date)
 
-# TODO: Maybe add a priority buton as well.
 class NoteForm(FlaskForm):
     note = StringField('note', validators=[InputRequired()])
     submit = SubmitField('Add Note')
@@ -47,9 +46,9 @@ def main():
     notes = Notes.query.all()
     # notes = Notes.query.order_by(Notes.id.desc())
     form = NoteForm()
-    return render_template('notes.html', form=form, notes=notes)
+    return render_template('newtab.html', form=form, notes=notes)
 
-@app.route('/new', methods=['get', 'POST'])
+@app.route('/new', methods=['POST'])
 def new_note():
     form = NoteForm()
     if request.form.get('note_id'): #this is to delete, i should rename this.

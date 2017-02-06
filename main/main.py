@@ -1,12 +1,14 @@
 '''
 TODO:
 -√transfer sqlite to mysql
--convert passed Date() into a python datetime object
--upload app to python anywhere
--create models / test models
+-√convert passed Date() into a python datetime object
+-√upload app to python anywhere
+-√create models / test models
+-transfer notes template to shared new-tab template
 -get notes working
 -get prides working
 -get links displayed
+-refactor notes
 -create log in so people can't change my stuff.
 
 -study math
@@ -67,3 +69,7 @@ class Prides(db.Model):
 	def __repr__(self):
 		return "Date: {}\nMath: {}\nProgramming: {}\nExercise: {}".format(
 			self.p_date, self.math, self. programming, self.exercise)
+
+if __name__ == "__main__":
+    db.create_all()
+    app.run(debug=True)
