@@ -1,5 +1,8 @@
 ﻿body {
     display: flex;
+    justify-content:  space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
     font-family: sans-serif;
     font-size: .92rem;
     color: #333333;
@@ -7,10 +10,11 @@
 }
 #notes, #links {
     background-color: whitesmoke;
-    margin: auto;
-    padding: 5px;
+/*     margin: auto; */
+    padding: 15px;
     box-shadow: 0 0 4px #888888;
-    max-width: 400px;  
+    max-width: 380px;
+    min-width: 280px;
 }
 
 header h1 {
@@ -31,4 +35,14 @@ header h1 {
 
 #test {
     text-align: center;
+}
+
+#linkIcons {
+    display: flex;
+    justify-content:  space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.icon {
+    width: 20px;
 }

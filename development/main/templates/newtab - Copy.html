@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <title>new-tab</title>
 <!--     <link src="{{ url_for('static', filename='../static/pride.js') }}"> -->
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='../static/studyWeek.css') }}">
+<link rel= "stylesheet" type= "text/css" href="../static/studyWeek.css">
 </head>
 <body>
 
@@ -71,18 +71,14 @@ Note: The top hidden button here catches a form submission when the user
     </div>
 
     <div id="links">
-        <header>
-            <div id="underline">
-                <h1 id='title'>Links</h1>
-            <div id="underline">
-        </header>
-        <a href="https://www.khanacademy.org/"><h4>KhanAcademy</h4></a>
-        <a href="https://courses.edx.org/dashboard"><h4>Edx</h4></a>
-        <a href="http://www.codewars.com/kata/search/my-languages?q=&r%5B%5D=-8&xids=completed&beta=false"><h4>CodeWars</h4></a>
-        <a href="https://www.coursera.org/"><h4>Coursera</h4></a>
-    </div>
 
-<script src="{{ url_for('static', filename='../static/pride.js') }}">
+        <h3>Khan Academy</h3>
+        <h3>Edx</h3>
+        <h3>Codewars</h3>
+        <h3>Coursera</h3>
+
+    </div>
+<script src='static/pride.js'>
 
 </script>
 </body>

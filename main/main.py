@@ -2,13 +2,13 @@
 TODO:
 -√transfer sqlite to mysql
 -√convert passed Date() into a python datetime object
--√upload app to python anywhere
 -√create models / test models
 -√transfer notes template to shared new-tab template
 -√get notes working
 -√get prides working
--get links displayed
--refactor notes
+-√get links displayed
+-√refactor notes
+-upload app to python anywhere
 -create log in so people can't change my stuff.
 
 -study math
