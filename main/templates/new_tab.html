@@ -4,8 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <title>new-tab</title>
-<!--     <link src="{{ url_for('static', filename='../static/pride.js') }}"> -->
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='../static/studyWeek.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='../static/studyWeek.css') }}">
 </head>
 <body>
 
@@ -15,8 +14,8 @@
                 <h1 id='title'>Notes</h1>
             </div>
         </header>
-<!-- Start note template -->
 
+<!-- Start note template -->
 <!-- Note: Button formacation isn't working. Why? With formacation I didn't need
       an 'action' parameter when I made my pride map. What is different here?
 Note: The top hidden button here catches a form submission when the user
@@ -38,14 +37,36 @@ Note: The top hidden button here catches a form submission when the user
 
     <div id="heatMap">
         <header>
-            <div id='test'><mark id='day'>FRIDAY<br>2017-02-02</mark></div>
+            <div id='test'>
+                <div id="now_date_name"></div>
+                <button id="previousDate">-</button>
+                <span id="now_date"></span>
+                <button id="nextDate">+</button>
+                <hr>
+            </div>
         </header>
-        
         <div id='conent'>
+            <form method='POST'>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <input type="hidden" name="selectedDate" value="x" id="serverDate"/>
+                Math: 
+                <button type='submit' formaction='/newp' value='1' name='math'>+</button>
+                <button type='submit' formaction='/newp' value='0' name='math'>-</button>
 
+                Prog:
+                <button type='submit' formaction='/newp' value='1' name='programming'>+</button>
+                <button type='submit' formaction='/newp' value='0' name='programming'>-</button>
+
+                Excr:
+                <button type='submit' formaction='/newp' value='1' name='exercise'>+</button>
+                <button type='submit' formaction='/newp' value='0' name='exercise'>-</button>
+            </form>
+            {% for row in prides %}
+                <br> {{ row }}
+            {% endfor %}
         </div>
 
-    </div>
+    </div><!-- end heat map -->
 
     <div id="links">
         <header>
@@ -53,9 +74,13 @@ Note: The top hidden button here catches a form submission when the user
                 <h1 id='title'>Links</h1>
             <div id="underline">
         </header>
-    </div>
+        <a href="https://www.khanacademy.org/"><h4>KhanAcademy</h4></a>
+        <a href="https://courses.edx.org/dashboard"><h4>Edx</h4></a>
+        <a href="http://www.codewars.com/kata/search/my-languages?q=&r%5B%5D=-8&xids=completed&beta=false"><h4>CodeWars</h4></a>
+        <a href="https://www.coursera.org/"><h4>Coursera</h4></a>
+    </div><!-- end links -->
 
-<script>
+<script src="{{ url_for('static', filename='../static/pride.js') }}">
 
 </script>
 </body>

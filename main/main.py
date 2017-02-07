@@ -8,8 +8,10 @@ TODO:
 -√get prides working
 -√get links displayed
 -√refactor notes
+-transfer development versions to production app.
 -upload app to python anywhere
 -create log in so people can't change my stuff.
+-change delete button into a icon.
 
 -study math
 -excercise
@@ -44,15 +46,18 @@ class Notes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     note = db.Column(db.String(200))
     n_date = db.Column(db.DateTime)
+    show = db.Column(db.Boolean)
 
     def __init__(self, note, n_date=None):
         self.note = note
         if n_date==None:
         	n_date = datetime.utcnow()
         self.n_date = n_date
+        self.show = show
 
     def __repr__(self):
-        return "Time: {}\nNote: {}\n".format(self.note, self.n_date)
+        return "Time: {}\nNote: {}\nShow: {}\n".format(
+            self.note, self.n_date, self.show)
 
 class Prides(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
@@ -70,6 +75,52 @@ class Prides(db.Model):
 	def __repr__(self):
 		return "Date: {}\nMath: {}\nProgramming: {}\nExercise: {}".format(
 			self.p_date, self.math, self. programming, self.exercise)
+
+class NoteForm(FlaskForm):
+    note = StringField('note', validators=[InputRequired()])
+    submit = SubmitField('Add Note')
+
+@app.route('/', methods=['GET'])
+def main():
+    notes = Notes.query.filter_by(show=True).all()
+    prides = Prides.query.order_by(Prides.p_date.desc()).all()
+    form = NoteForm()
+    return render_template('newtab.html', form=form, notes=notes, prides=prides)
+
+@app.route('/changeNote', methods=['POST'])
+def new_note():
+    form = NoteForm()
+    if request.form.get('del_note_id'):
+        del_note_id = request.form['del_note_id']
+        row = Notes.query.filter_by(id=del_note_id).first()
+        setattr(row, 'show', False)
+        db.session.add(row)
+        db.session.commit()
+        return redirect(url_for('main'))
+    if form.validate_on_submit():
+        note = request.form['note']
+        row = Notes(note)
+        db.session.add(row)
+        db.session.commit()
+    return redirect(url_for('main'))
+
+@app.route('/newp', methods=['POST'])
+def new_p():
+    buttons = ['math', 'programming', 'exercise']
+    for pride_button in buttons:
+        if request.form.get(pride_button):
+            button_value = int(request.form[pride_button])
+            selected_date = request.form['selectedDate']
+            s_date_obj = date(int(selected_date[0:4]),
+                              int(selected_date[5:7]),
+                              int(selected_date[8:10]))
+            today_row = Prides.query.filter_by(p_date=s_date_obj).first()
+            if not today_row:
+                today_row = Prides(s_date_obj, 0,0,0)
+            setattr(today_row, pride_button, button_value)
+            db.session.add(today_row)
+            db.session.commit()
+    return redirect(url_for('main'))
 
 if __name__ == "__main__":
     db.create_all()

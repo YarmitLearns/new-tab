@@ -1,8 +1,4 @@
 ﻿#TODO: Frontend: change delet button into a icon. 
-#                add css
-#TODO: Backend: add button to delete a note.
-#
-#TODO: Make use of my DeleteNoteForm class within the notes.html template.
 from flask import Flask, render_template, url_for, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
@@ -60,8 +56,8 @@ class NoteForm(FlaskForm):
     note = StringField('note', validators=[InputRequired()])
     submit = SubmitField('Add Note')
 
-class DeleteNoteForm(FlaskForm):
-    submit = SubmitField('X')
+# class DeleteNoteForm(FlaskForm):
+#     submit = SubmitField('X')
 
 @app.route('/', methods=['GET'])
 def main():
