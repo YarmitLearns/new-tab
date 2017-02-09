@@ -1,17 +1,13 @@
 '''
 TODO:
--√transfer sqlite to mysql
--√convert passed Date() into a python datetime object
--√create models / test models
--√transfer notes template to shared new-tab template
--√get notes working
--√get prides working
--√get links displayed
--√refactor notes
--transfer development versions to production app.
--upload app to python anywhere
+-try out free mysql db for local development.
+-clean up / delete development folder (now that I'm using
+    version control, i should develop from more directly)
+-setup db-migration in case i need to change db
 -create log in so people can't change my stuff.
 -change delete button into a icon.
+-upload app to python anywhere
+-find out why button formacation works in my heat map, but not my note template.
 
 -study math
 -excercise
@@ -28,11 +24,14 @@ from datetime import date, datetime
 from sqlalchemy.sql import func
 
 app = Flask(__name__)
-SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
-    username="yarmit",
-    password="my7349pass",
-    hostname="yarmit.mysql.pythonanywhere-services.com",
-    databasename="yarmit$new-tab")
+#   # On pythonanywhere:
+# SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
+#     username="yarmit",
+#     password="my7349pass",
+#     hostname="yarmit.mysql.pythonanywhere-services.com",
+#     databasename="yarmit$new-tab")
+#   # On desktop: 
+SQLALCHEMY_DATABASE_URI = 'sqlite:///newtab.db'
 app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config['SECRET_KEY'] = 'yabadaba dubwub'
@@ -48,7 +47,7 @@ class Notes(db.Model):
     n_date = db.Column(db.DateTime)
     show = db.Column(db.Boolean)
 
-    def __init__(self, note, n_date=None):
+    def __init__(self, note, n_date=None, show=True):
         self.note = note
         if n_date==None:
         	n_date = datetime.utcnow()
@@ -85,7 +84,7 @@ def main():
     notes = Notes.query.filter_by(show=True).all()
     prides = Prides.query.order_by(Prides.p_date.desc()).all()
     form = NoteForm()
-    return render_template('newtab.html', form=form, notes=notes, prides=prides)
+    return render_template('new_tab.html', form=form, notes=notes, prides=prides)
 
 @app.route('/changeNote', methods=['POST'])
 def new_note():

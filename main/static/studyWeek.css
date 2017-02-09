@@ -8,16 +8,11 @@
     color: #333333;
     background-color: white;
 }
-#notes {
+#notes, #links {
     background-color: whitesmoke;
 /*     margin: auto; */
     padding: 15px;
     box-shadow: 0 0 4px #888888;
-    max-width: 380px;
-    min-width: 280px;
-}
-#links {
-    text-align: center;
     max-width: 380px;
     min-width: 280px;
 }

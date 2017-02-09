@@ -13,6 +13,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///notes.db'
 app.config['SECRET_KEY'] = 'yabadaba dubwub'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 db = SQLAlchemy(app)
 csrf = CSRFProtect(app)
@@ -56,6 +57,7 @@ class NoteForm(FlaskForm):
     note = StringField('note', validators=[InputRequired()])
     submit = SubmitField('Add Note')
 
+# don't think that i need this.
 # class DeleteNoteForm(FlaskForm):
 #     submit = SubmitField('X')
 

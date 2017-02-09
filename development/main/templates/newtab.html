@@ -9,33 +9,6 @@
 </head>
 <body>
 
-    <div id="notes">
-        <header>
-            <div id="underline">
-                <h1 id='title'>Notes</h1>
-            </div>
-        </header>
-<!-- Start note template -->
-
-<!-- Note: Button formacation isn't working. Why? With formacation I didn't need
-      an 'action' parameter when I made my pride map. What is different here?
-Note: The top hidden button here catches a form submission when the user
-      presses 'enter', rather than clicking the 'submit' button. Pressing
-      enter is the same as pressing the first button in the HTML. It doesn't
-      seem right: how can I create this without my hidden button? -->
-      <form method='POST' action='/changeNote'>
-            <input type='hidden' name='csrf_token' value='{{ csrf_token() }}'/>
-            <button type='submit' style="display: none"></button>
-            {% for note in notes %}
-                <button type='submit' value='{{ note.id }}' name='del_note_id'>X</button>
-                {{ note.note }} <br>
-            {% endfor %}
-            {{ form.note(autofocus=true) }}
-            {{ form.submit }}
-        </form><!-- End note template -->
-
-    </div>
-
     <div id="heatMap">
         <header>
             <div id='test'>
@@ -70,16 +43,40 @@ Note: The top hidden button here catches a form submission when the user
 
     </div>
 
-    <div id="links">
+    <div id="notes">
         <header>
             <div id="underline">
-                <h1 id='title'>Links</h1>
-            <div id="underline">
+                <h1 id='title'>Notes</h1>
+            </div>
         </header>
+<!-- Start note template -->
+
+<!-- Note: Button formacation isn't working. Why? With formacation I didn't need
+      an 'action' parameter when I made my pride map. What is different here?
+Note: The top hidden button here catches a form submission when the user
+      presses 'enter', rather than clicking the 'submit' button. Pressing
+      enter is the same as pressing the first button in the HTML. It doesn't
+      seem right: how can I create this without my hidden button? -->
+      <form method='POST' action='/changeNote'>
+            <input type='hidden' name='csrf_token' value='{{ csrf_token() }}'/>
+            <button type='submit' style="display: none"></button>
+            {% for note in notes %}
+                <button type='submit' value='{{ note.id }}' name='del_note_id'>X</button>
+                {{ note.note }} <br>
+            {% endfor %}
+            {{ form.note(autofocus=true) }}
+            {{ form.submit }}
+        </form><!-- End note template -->
+
+    </div>
+
+    <div id="links">
+        <hr>
         <a href="https://www.khanacademy.org/"><h4>KhanAcademy</h4></a>
         <a href="https://courses.edx.org/dashboard"><h4>Edx</h4></a>
         <a href="http://www.codewars.com/kata/search/my-languages?q=&r%5B%5D=-8&xids=completed&beta=false"><h4>CodeWars</h4></a>
         <a href="https://www.coursera.org/"><h4>Coursera</h4></a>
+        <hr>
     </div>
 
 <script src="{{ url_for('static', filename='../static/pride.js') }}">
