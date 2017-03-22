@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>canvas tests.</title>
+    <link href="studyWeek.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div id="notes">
+        <header>
+            <div id="underline">
+                <h1 id='title'>Notes</h1>
+            <div id="underline">
+        </header>
+    </div>
+
+    <div id="heatMap">
+        <header>
+            <div id='test'><mark id='day'>FRIDAY<br>2017-02-02</mark></div>
+        </header>
+        
+        <div id='conent'>
+
+        </div>
+
+    </div>
+
+    <div id="links">
+        <header>
+            <div id="underline">
+                <h1 id='title'>Links</h1>
+            <div id="underline">
+        </header>
+    </div>
+
+<script>
+
+    var d = new Date();
+    var weekday = new Array(7);
+    weekday[0] =  "Sunday";
+    weekday[1] = "Monday";
+    weekday[2] = "Tuesday";
+    weekday[3] = "Wednesday";
+    weekday[4] = "Thursday";
+    weekday[5] = "Friday";
+    weekday[6] = "Saturday";
+
+    var wDay = weekday[d.getDay()]; 
+    var nyDay = d.getFullYear();
+    var ndDay = d.getDate();
+    var nmDay = d.getMonth() + 1;
+
+    curDate = document.getElementById('day');
+    curDate.innerHTML = wDay + "<br>" + nyDay+"-"+ndDay+"-"+nmDay
+    links = document.getElementById('links')
+    links.innerHTML = d
+
+</script>
+</body>
+</html>
