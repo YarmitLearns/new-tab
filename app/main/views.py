@@ -17,6 +17,14 @@ from .. import db
 from ..models import Notes, Prides
 from . import main
 from .forms import NoteForm
+from ..email import send_email
+
+@main.route('/', methods=['GET'])
+def home():
+    notes = Notes.query.filter_by(show=True).all()
+    prides = Prides.query.order_by(Prides.p_date.desc()).all()
+    form = NoteForm()
+    return render_template('new_tab.html', form=form, notes=notes, prides=prides)
 
 @main.route('/changeNote', methods=['POST'])
 def new_note():
@@ -27,21 +35,13 @@ def new_note():
         setattr(row, 'show', False)
         db.session.add(row)
         db.session.commit()
-        return redirect(url_for('main'))
+        return redirect(url_for('main.home'))
     if form.validate_on_submit():
         note = request.form['note']
         row = Notes(note)
         db.session.add(row)
         db.session.commit()
     return redirect(url_for('main.home'))
-
-@main.route('/', methods=['GET'])
-def home():
-    notes = Notes.query.filter_by(show=True).all()
-    prides = Prides.query.order_by(Prides.p_date.desc()).all()
-    form = NoteForm()
-    return render_template('new_tab.html', form=form, notes=notes, prides=prides)
-
 
 @main.route('/newp', methods=['POST'])
 def new_p():
@@ -61,6 +61,8 @@ def new_p():
             db.session.commit()
     return redirect(url_for('main.home'))
 
-## Next up:
-# Figure out how to get my config file loaded
-# figure out how to start this blueprint app.
+@main.route('/email')
+def email():
+    send_email('l34p@tutanota.com', "First Blueprint Test",
+                'email/test')
+    return "Email sent!"
